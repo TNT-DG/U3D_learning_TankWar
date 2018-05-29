@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour {
 
     public float moveSpeed = 10.0f;
 
-    
+    public bool isPlayerBullet;
 
 	// Use this for initialization
 	void Start () {
@@ -25,20 +25,35 @@ public class Bullet : MonoBehaviour {
     {
         switch (collision.tag)
         {
+            //子弹碰到玩家
             case "Tank":
-                collision.SendMessage("Die");
+                if (!isPlayerBullet)
+                {
+                    collision.SendMessage("Die");
+                    Destroy(gameObject);
+                }
                 break;
-
+            //子弹碰到基地
             case "Heart":
+                collision.SendMessage("Die");
+                Destroy(gameObject);
                 break;
-
+            //子弹碰到敌人
             case "Enemy":
+                if (isPlayerBullet)
+                {
+                    collision.SendMessage("Die");
+                    Destroy(gameObject);
+                }
                 break;
-
+            //子弹碰到墙
             case "Wall":
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
                 break;
-
+            //子弹碰到障碍
             case "Barrier":
+                Destroy(gameObject);
                 break;
 
             default:

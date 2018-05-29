@@ -8,7 +8,7 @@ TagManager:
   - Tank
   - Enemy
   - Wall
-  - Barriar
+  - Barrier
   layers:
   - Default
   - TransparentFX
