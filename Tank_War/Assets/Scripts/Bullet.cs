@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
 
     public float moveSpeed = 10.0f;
 
+    
+
 	// Use this for initialization
 	void Start () {
 	
@@ -21,6 +23,26 @@ public class Bullet : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        switch (collision.tag)
+        {
+            case "Tank":
+                collision.SendMessage("Die");
+                break;
+
+            case "Heart":
+                break;
+
+            case "Enemy":
+                break;
+
+            case "Wall":
+                break;
+
+            case "Barrier":
+                break;
+
+            default:
+                break;
+        }
     }
 }
