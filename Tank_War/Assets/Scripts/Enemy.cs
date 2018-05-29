@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour {
     public GameObject bulletPrefab;
     //计时器
     private float timeVal;
-    private float timeValChangeDir;
+    private float timeValChangeDir=4;
 
     private void Awake()
     {
