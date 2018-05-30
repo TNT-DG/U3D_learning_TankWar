@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour {
 
     //单例
     private static PlayerManager instance;
+    private PlayerManager() { }
 
     public static PlayerManager Instance
     {
