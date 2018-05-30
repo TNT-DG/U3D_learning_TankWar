@@ -81,6 +81,7 @@ MonoBehaviour:
   brokenSprite: {fileID: 21300012, guid: 529e000d42d32de49bc475716ba7ae37, type: 3}
   explosionPrefab: {fileID: 1451933585969042, guid: 30b8e66755c6b804ea6419de8befc650,
     type: 2}
+  dieAudio: {fileID: 8300000, guid: 41660860d05dbdf49b3c8da6332a4ef9, type: 3}
 --- !u!212 &212541363278707486
 SpriteRenderer:
   m_ObjectHideFlags: 1

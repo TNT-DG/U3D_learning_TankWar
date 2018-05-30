@@ -75,7 +75,7 @@ MonoBehaviour:
   enemyPrefabList:
   - {fileID: 1049591170574860, guid: 33c72d4b5082a9c419586c80045a34c2, type: 2}
   - {fileID: 1211366599944190, guid: 0eb936f1d3fe4d54099d157f2b45beaf, type: 2}
-  createPlayer: 1
+  createPlayer: 0
 --- !u!212 &212278998580787012
 SpriteRenderer:
   m_ObjectHideFlags: 1

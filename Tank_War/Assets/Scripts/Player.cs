@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class Player : MonoBehaviour {
     public Sprite[] tankSprite;  //上 右 下 左 0 8 16 24
     public GameObject explosionPrefab;
     public GameObject defendPrefab;
+    public AudioSource moveAudio;
+    public AudioClip[] tankAudio;
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -40,21 +43,24 @@ public class Player : MonoBehaviour {
                 defendPrefab.SetActive(false);
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
+        if(PlayerManager.Instance.isDefeat==true)
+        {
+            return;
+        }
+        Tank_Move();
+        //Attack();
         if (timeVal >= 0.4)
         {
             Attack();
         }
         else
         {
-            timeVal += Time.deltaTime;
+            timeVal += Time.fixedDeltaTime;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        Tank_Move();
-        //Attack();
     }
 
     /// <summary>
@@ -81,6 +87,14 @@ public class Player : MonoBehaviour {
             return;
         }
 
+        if (Mathf.Abs(v) > 0.05f)
+        {
+            moveAudio.clip = tankAudio[1];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
+        }
 
         //水平轴输入
         float h = Input.GetAxisRaw("Horizontal");
@@ -94,6 +108,22 @@ public class Player : MonoBehaviour {
         {
             sr.sprite = tankSprite[1];
             bulletEulerAngles = new Vector3(0, 0, -90);
+        }
+        if (Mathf.Abs(h) > 0.05f)
+        {
+            moveAudio.clip = tankAudio[1];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
+        }
+        else
+        {
+            moveAudio.clip = tankAudio[0];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
         }
     }
 
@@ -119,6 +149,8 @@ public class Player : MonoBehaviour {
         {
             return;
         }
+        //玩家生命值-1
+        PlayerManager.Instance.isDead = true;
         //产生爆炸特效
         Instantiate(explosionPrefab, transform.position, transform.rotation);
         //死亡

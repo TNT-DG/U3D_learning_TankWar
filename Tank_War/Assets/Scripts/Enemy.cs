@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour {
     //属性值
     private float moveSpeed = 3.0f;
     private Vector3 bulletEulerAngles;
-    private float v;
+    private float v=-1;
     private float h;
     //引用
     private SpriteRenderer sr;
@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour {
     public GameObject bulletPrefab;
     //计时器
     private float timeVal;
-    private float timeValChangeDir=4;
+    private float timeValChangeDir=0;
 
     private void Awake()
     {
@@ -133,10 +133,18 @@ public class Enemy : MonoBehaviour {
     /// </summary>
     private void Die()
     {
+        PlayerManager.Instance.playerScole++;
         //产生爆炸特效
         Instantiate(explosionPrefab, transform.position, transform.rotation);
         //死亡
         Destroy(gameObject);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            timeValChangeDir = 4;
+        }
+    }
 }
